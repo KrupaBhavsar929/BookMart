@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Process</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #3498db, #2980b9); /* Gradient from light blue to dark blue */
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            text-align: center;
+        }
+        input[type="submit"] {
+            background-color: #2ecc71; /* Green color for button */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #27ae60; /* Darker green color on hover */
+        }
+        .payment-process-img {
+            display: block;
+            margin: 0 auto 20px; /* Center the image and add some space at the bottom */
+            max-width: 100%; /* Ensure the image doesn't exceed its container */
+        }
+        button[type="button"] {
+        background-color: #2ecc71; /* Green color for button */
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+}
+    </style>
+</head>
+<body>
+<button type="button" onclick="goBack()">Back</button>
+<div class="container">
+
+    <img class="payment-process-img" src="{%static 'img.png'%}" alt="Payment Process">
+    <h1>Payment Process</h1>
+    <form class="text-center border border-light p-5" action="/success" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="amount" value="{{ payment.amount }}">
+        <!-- RAZORPAY INTEGRATION HERE -->
+        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="rzp_test_v8YmrOPZwGRgde"
+                data-amount="{{payment.amount}}"
+                data-currency="INR"
+                data-buttontext="Pay with Razorpay"
+                data-name="Your Project Name"
+                data-description="Complete Ad Solution"
+                data-image="https://oibp1.000webhostapp.com/logo.PNG"
+                data-prefill.name="{{request.user.first_name}}"
+                data-prefill.email="{{request.user.email}}"
+                data-theme.color="#2ecc71"></script>
+    </form>
+    <script>
+     function goBack() {
+<!--            location.replace("cart.html");-->
+    window.history.back();
+     }
+    // Get the amount from the context passed from the view
+    var amount = {{ amount }};
+
+    // Store the amount in the local storage
+    localStorage.setItem('amount', amount);
+</script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        /* Your existing CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #2980b9, #6dd5fa, #ffffff);
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #666;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #1c6da8;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        h4 {
+            color: #333;
+            font-size: 20px;
+        }
+    </style>
+    {% csrf_token %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            });
+        });
+        // Your AJAX request code here...
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>Thank You <span style="color: red;">{{ user_id.uname }}</span> for Your Purchase!</h2>
+    <p style="color: red;">Your payment was successful.</p>
+    <h1 style="color: green;">Total Amount Paid - ₹<span id="amount"></span></h1>
+</div>
+<div class="container">
+    <h1>Purchased Book History</h1>
+     <a href="/myorder" class="btn">View Booking History</a>
+    <ul>
+        {% for item in detail %}
+        <li>
+            <h4>Book Name: {{ item.name }}</h4>
+            <!-- Add any other details you want to display -->
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/#" class="btn">Go to Home</a>
+</div>
+
+<script>
+    // Retrieve the amount from the local storage
+    var amount = localStorage.getItem('amount');
+
+    // Display the amount in the element with id="amount"
+    document.getElementById('amount').textContent = amount/100;
+</script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+{% load static %}
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Panel</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+          content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, materialpro admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, materialpro admin lite design, materialpro admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+          content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="canonical" href="{% static 'adminmaster/https://www.wrappixel.com/templates/materialpro-lite/'%}"/>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{%static 'adminmaster/assets/images/favicon.png'%}">
+    <!-- chartist CSS -->
+    <link href="{% static 'adminmaster/assets/plugins/chartist-js/dist/chartist.min.css'%}" rel="stylesheet">
+    <link href="{% static 'adminmaster/assets/plugins/chartist-js/dist/chartist-init.css'%}" rel="stylesheet">
+    <link href="{% static 'adminmaster/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css'%}"
+          rel="stylesheet">
+    <!--This page css - Morris CSS -->
+    <link href="{% static 'adminmaster/assets/plugins/c3-master/c3.min.css'%}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'adminmaster/css/style.min.css'%}" rel="stylesheet">
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+     data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    {%include 'adminmaster/header.html'%}
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <aside class="left-sidebar" data-sidebarbg="skin6">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/index" aria-expanded="false"><i class="mdi me-2 mdi-home"></i><span
+                                    class="hide-menu">Home</span></a></li>
+                     <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                href="create_blog" aria-expanded="false">
+                            <i class="mdi me-2 mdi-image"></i><span class="hide-menu">Add Book</span></a>
+                    </li>
+                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="viewbook" aria-expanded="false"><i class="mdi me-2 mdi-message"></i><span
+                                    class="hide-menu">View Books</span></a></li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/vieworder" aria-expanded="false"><i class="mdi me-2 mdi-account "></i><span
+                                    class="hide-menu">View Order</span></a></li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/getContact" aria-expanded="false"><i class="mdi me-2 mdi-account-box"></i><span
+                                    class="hide-menu">View Contact</span></a></li>
+                    </ul>
+
+                </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <div class="row align-items-center">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="page-title mb-0 p-0">View Order Detail</h3>
+                    <div class="d-flex align-items-center">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">View Book Detail</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <!-- column -->
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">View Order Detail</h4>
+                            <div class="table-responsive">
+                                <table class="table user-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="border-top-0">ID</th>
+                                        <th class="border-top-0" style="white-space: nowrap;">NAME</th>
+                                        <th class="border-top-0">AMOUNT PAID</th>
+                                        <th class="border-top-0">BOOK NAME</th>
+                                        <th class="border-top-0">Image</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {%for i in data%}
+                                    <tr>
+                                        <td>{{i.id}}</td>
+                                        <td>{{i.uid.uname}}</td>
+                                        <td>{{i.amount}}</td>
+                                        <td>{{i.bookid.name}}</td>
+                                        <td><img src="{{i.bookid.image.url}}" height="100px" width="100px"></td>
+                                    </tr>
+                                    {%endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Right sidebar -->
+            <!-- ============================================================== -->
+            <!-- .right-sidebar -->
+            <!-- ============================================================== -->
+            <!-- End Right sidebar -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="{% static 'adminmaster/assets/plugins/jquery/dist/jquery.min.js'%}"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="{% static 'adminmaster/assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
+<script src="{% static 'adminmaster/js/app-style-switcher.js'%}"></script>
+<!--Wave Effects -->
+<script src="{% static 'adminmaster/js/waves.js'%}"></script>
+<!--Menu sidebar -->
+<script src="{% static 'adminmaster/js/sidebarmenu.js'%}"></script>
+<!--Custom JavaScript -->
+<script src="{% static 'adminmaster/js/custom.js'%}"></script>
+</body>
+
+</html>

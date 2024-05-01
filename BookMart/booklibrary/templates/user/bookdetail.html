@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Mart</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/icon" href="{% static 'user/assets/images/favicon.ico'%}">
+    <!-- Font Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="{% static 'user/assets/css/bootstrap.min.css'%}" rel="stylesheet">
+    <!-- Main Style -->
+    <link href="{%static 'user/style.css'%}" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <style>
+        /* Define body styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f5f5; /* Background color for the entire page */
+            color: #333; /* Text color */
+        }
+        /* Container styles */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 90%;
+            margin: 20px auto;
+            background-color: #fff; /* Background color for the container */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adding shadow to the container */
+            border-radius: 10px; /* Rounding the container corners */
+            overflow: hidden; /* Ensures rounded corners don't get cut off */
+        }
+        /* Left section styles */
+        .left-section {
+            flex: 0 0 30%; /* Adjust width of left section */
+            padding: 20px;
+        }
+        /* Right section styles */
+        .right-section {
+            flex: 0 0 40%; /* Adjust width of right section */
+            padding: 20px;
+            background-color: #f9f9f9; /* Background color for the right section */
+        }
+        /* Card styles */
+        .card {
+<!--            background-color: #fff; /* Background color for cards */-->
+<!--            padding: 20px;-->
+<!--            margin-bottom: 20px;-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow to cards */-->
+<!--            border-radius: 8px; /* Rounding the corners of cards */-->
+display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Adjust spacing between cards as needed */
+    padding: 20px;
+    border: 1px solid #ccc; /* Add border for card */
+    border-radius: 8px; /* Add border radius for card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card:last-child {
+            margin-bottom: 0; /* Remove bottom margin from the last card */
+        }
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px; /* Rounding the corners of images */
+        }
+        .card p {
+            margin: 10px 0;
+            color: #555; /* Text color for paragraphs */
+        }
+        .button {
+            display: block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3; /* Button background color on hover */
+        }
+        .book-image-container {
+<!--    width: 200px; /* Adjust as needed */-->
+<!--    height: 300px; /* Adjust as needed */-->
+<!--    overflow: hidden;-->
+
+ width: 150px; /* Adjust width of book image container */
+    height: 200px; /* Adjust height of book image container */
+    overflow: hidden;
+    margin-right: 20px;
+}
+.book-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.book-details {
+    display: flex;
+    align-items: center;
+}
+.book-info {
+    flex: 1; /* Take remaining space */
+}
+.image-container {
+    width: 200px; /* Adjust width as needed */
+    height: 300px; /* Adjust height as needed */
+    overflow: hidden;
+}
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio */
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="left-section">
+        <!-- Right section content here -->
+        <form method="post" id="buy-form">
+            {% csrf_token %}
+            <div class="card">
+                <div class="image-container">
+                <img src="{{data.image.url}}" alt="Book Image">
+                </div>
+                <div class="book-info">
+
+                <p>Name: {{data.name}}</p>
+                <p>{{data.detail}}</p>
+                <button type="submit" class="button" id="buy-now-btn">Buy now</button>
+                </div>
+            </div>
+        </form>
+          <div class="card">
+            <p>AUDIO DETAIL</p>
+            <div style="overflow: auto;">
+                <button id="playButton" class="button" style="float: left; margin-right: 10px;">Play Audio</button>
+                <button id="stopButton" class="button" style="float: left;">Stop</button>
+            </div>
+            <audio id="audioPlayer" src="{{ data.audio.url }}" preload="auto"></audio>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for audio player and buy button -->
+<script>
+    var audio = document.getElementById('audioPlayer');
+    var playButton = document.getElementById('playButton');
+    var stopButton = document.getElementById('stopButton');
+
+    playButton.addEventListener('click', function() {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    });
+
+    stopButton.addEventListener('click', function() {
+        audio.pause();
+        audio.currentTime = 0;
+    });
+
+    document.getElementById("buy-now-btn").addEventListener("click", function() {
+        // Check user login status via AJAX when the button is clicked
+        fetch('/check_login_status/') // URL to your view for checking login status
+        .then(response => response.json())
+        .then(data => {
+            if (data.is_logged_in) {
+                // If user is logged in, redirect to the cart page
+                window.location.href = '/cart';
+            } else {
+                // If user is not logged in, show an alert and redirect to login page
+                alert('Please login first.');
+                window.location.href = '/login';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+   function loginAlert() {
+    // Check user login status via AJAX
+    fetch('/check_login_status/') // Replace '/check_login_status/' with your server endpoint URL
+        .then(response => response.json())
+        .then(data => {
+            if (data.is_logged_in) {
+                // If user is already logged in, do nothing or provide a message indicating the user is already logged in
+                alert('You are already logged in.');
+            } else {
+                // If user is not logged in, show an alert and redirect to login page
+                alert('Please login first.');
+                window.location.href = "/login";
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+</script>
+</body>
+</html>

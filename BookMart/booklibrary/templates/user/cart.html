@@ -1,0 +1,192 @@
+<!-- cart.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Cart</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px 20px 60px; /* Add padding to the bottom */
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    #cart {
+        position: relative;
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+    }
+
+    .item span {
+        font-size: 18px;
+    }
+
+    .buttons button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .buttons button:hover {
+        background-color: #45a049;
+    }
+
+    .quantity {
+        margin: 0 10px;
+    }
+
+    #totalItems {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 16px;
+    }
+
+    #totalPrice {
+        color: #007bff;
+        font-size: 16px;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    #buy {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        margin-left: 20px; /* Add margin left */
+    }
+
+    #buy:hover {
+        background-color: #0056b3;
+    }
+
+    .buttons .delete {
+        background-color: #f44336; /* Red */
+    }
+
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Shopping Cart</h2>
+    <div id="cart">
+        {% for item in cart_details %}
+        <div class="item" id="item-{{ item.id }}">
+            <span>{{ item.name }}</span>
+            <span class="price">{{ item.price }}</span>
+            <div class="buttons">
+<!--                <button class="decrement" data-item-id="{{ item.id }}">-</button>-->
+                <span class="quantity">1</span>
+<!--                <button class="increment" data-item-id="{{ item.id }}">+</button>-->
+<!--                <button class="delete" data-item-id="{{ item.id }}">Delete</button>-->
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div id="totalItems">Total Items: {{ cart_details|length }}</div>
+    <div id="totalPrice" data-total-price="{{ total_price }}">Total Price: ₹{{ total_price }}</div>
+    <a href="/payment_process" id="buy">Buy Now</a>
+</div>
+<script>
+    // Retrieve cart details JSON string from the Django context
+    var cartDetailsJson = "{{ cart_details_json }}";
+
+    // Parse the JSON string to convert it into a JavaScript object
+    var cartDetails = JSON.parse(cartDetailsJson);
+
+    // Store cart details in local storage
+    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
+</script>
+
+</body>
+</html>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get all increment and decrement buttons
+        var incrementButtons = document.querySelectorAll(".increment");
+        var decrementButtons = document.querySelectorAll(".decrement");
+        var totalPriceElement = document.getElementById("totalPrice");
+
+        // Add click event listeners to increment buttons
+        incrementButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                var itemId = button.getAttribute("data-item-id");
+                var quantityElement = document.querySelector("#item-" + itemId + " .quantity");
+                var currentQuantity = parseInt(quantityElement.textContent);
+                quantityElement.textContent = currentQuantity + 1;
+
+                // Update total price
+                updateTotalPrice();
+            });
+        });
+
+        // Add click event listeners to decrement buttons
+        decrementButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                var itemId = button.getAttribute("data-item-id");
+                var quantityElement = document.querySelector("#item-" + itemId + " .quantity");
+                var currentQuantity = parseInt(quantityElement.textContent);
+                if (currentQuantity > 1) {
+                    quantityElement.textContent = currentQuantity - 1;
+                }
+
+                // Update total price
+                updateTotalPrice();
+            });
+        });
+
+        // Function to update total price
+        function updateTotalPrice() {
+            var totalItems = {{ cart_details|length }};
+            var totalPrice = 0;
+            for (var i = 0; i < totalItems; i++) {
+                var itemPrice = parseFloat(document.getElementById("item-" + (i+1)).querySelector(".price").textContent);
+                var itemQuantity = parseInt(document.getElementById("item-" + (i+1)).querySelector(".quantity").textContent);
+                totalPrice += itemPrice * itemQuantity;
+            }
+            totalPriceElement.textContent = "Total Price: $" + totalPrice.toFixed(2);
+        }
+    });
+</script>

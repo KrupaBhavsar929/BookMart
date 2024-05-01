@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+{% load static %}
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" Add Barberhref="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        body {
+
+
+    background: url("https://res.cloudinary.com/finnhvman/image/upload/v1541930411/pattern.png");
+}
+    .require {
+    color: #666;
+}
+label small {
+    color: #999;
+    font-weight: normal;
+}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        window.alert = function(){};
+        var defaultCSS = document.getElementById('bootstrap-css');
+        function changeCSS(css){
+            if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />');
+            else $('head > link').filter(':first').replaceWith(defaultCSS);
+        }
+        $( document ).ready(function() {
+          var iframe_height = parseInt($('html').height());
+          window.parent.postMessage( iframe_height, 'https://bootsnipp.com');
+        });
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+          content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, materialpro admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, materialpro admin lite design, materialpro admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+          content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="canonical" href="{% static 'adminmaster/https://www.wrappixel.com/templates/materialpro-lite/'%}"/>
+    <!-- Favicon icon -->
+    <link rel="icon" type="{% static 'adminmaster/image/png'%}" sizes="16x16"
+          href="{% static 'adminmaster/assets/images/favicon.png'%}">
+    <!-- Custom CSS -->
+    <link href="{% static 'adminmaster/css/style.min.css'%}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="{% static 'adminmaster/https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'%}"></script>
+    <script src="{% static 'adminmaster/https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'%}"></script>
+    <![endif]-->
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+     data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    {%include 'adminmaster/header.html'%}
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <aside class="left-sidebar" data-sidebarbg="skin6">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/home" aria-expanded="false"><i class="mdi me-2 mdi-home"></i><span
+                                    class="hide-menu">Home</span></a></li>
+                       <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                href="inbox" aria-expanded="false"><i class="mdi me-2 mdi-inbox"></i>
+                           <span class="hide-menu">Inbox</span></a></li>
+                     <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                href="create_blog" aria-expanded="false">
+                            <i class="mdi me-2 mdi-image"></i><span class="hide-menu">Create Blog</span></a>
+                    </li>
+                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="member" aria-expanded="false"><i class="mdi me-2 mdi-message"></i><span
+                                    class="hide-menu">Member Request</span></a></li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="confirm" aria-expanded="false"><i class="mdi me-2 mdi-account "></i><span
+                                    class="hide-menu">Confirmation</span></a></li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="create_portfolio" aria-expanded="false"><i class="mdi me-2 mdi-account-box"></i><span
+                                    class="hide-menu">Create Portfolio</span></a></li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="create_about" aria-expanded="false"><i class="mdi me-2 mdi-account-multiple"></i><span
+                                    class="hide-menu">Add Barber</span></a></li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="add_hairstyle" aria-expanded="false"><i class="mdi mdi-content-cut"></i><span
+                                    class="hide-menu">Add Hair Style</span></a></li>
+
+                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="add_massage" aria-expanded="false"><i class="mdi me-2 mdi-account-multiple"></i><span
+                                    class="hide-menu">Add Massage</span></a></li>
+
+                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="add_beardstyle" aria-expanded="false"><i class="mdi mdi-content-cut"></i><span
+                                    class="hide-menu">Add Beard Style</span></a></li>
+                    </ul>
+
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <div class="row align-items-center">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="page-title mb-0 p-0">Add Barber</h3>
+                    <div class="d-flex align-items-center">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><Add></Add> Barber</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <!-- Row -->
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-xlg-8 offset-xlg-2  col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-md-12 col-md-offset-2">
+
+                                        <h1 class="my-2 text-center">Add Barber</h1>
+
+                                        <form action="/about" class="form-horizontal  mx-2" enctype="multipart/form-data" method="post">
+                                            {%csrf_token%}
+                                            <div class="form-group">
+                                                <label class="col-md-12 my-2">Upload Image</label>
+                                                <div class="col-md-12">
+                                                    <input type="file" placeholder="Johnathan Doe"
+                                                           class="form-control ps-0" name="img">
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                             <div class="col-md-12">
+                                                 <label class="col-md-12 my-2">Designation</label>
+                                                    <textarea class="form-control" placeholder="Enter Designation..."class="form-control ps-0" name="designation"></textarea>
+                                                </div>
+                                             </div>
+                                             <div class="form-group">
+                                             <div class="col-md-12">
+                                                 <label class="col-md-12 my-2">Detail</label>
+                                                    <textarea class="form-control" placeholder="Enter Details..."class="form-control ps-0" name="detail"></textarea>
+                                                </div>
+                                             </div>
+                                             <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-info btn-lg btn-block">SUBMIT</button>
+                                                </div>
+                                             </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- ============================================================== -->
+                                <!-- End Page wrapper  -->
+                                <!-- ============================================================== -->
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- End Wrapper -->
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <!-- All Jquery -->
+                            <!-- ============================================================== -->
+                            <script src="{% static 'adminmaster/assets/plugins/jquery/dist/jquery.min.js'%}"></script>
+                            <!-- Bootstrap tether Core JavaScript -->
+                            <script src="{% static 'adminmaster/assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
+                            <script src="{% static 'adminmaster/js/app-style-switcher.js'%}"></script>
+                            <!--Wave Effects -->
+                            <script src="{% static 'adminmaster/js/waves.js'%}"></script>
+                            <!--Menu sidebar -->
+                            <script src="{% static 'adminmaster/js/sidebarmenu.js'%}"></script>
+                            <!--Custom JavaScript -->
+                            <script src="{% static 'adminmaster/js/custom.js'%}"></script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ <!-- footer -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- End footer -->
+<!-- ============================================================== -->
+        </div>
+    </div>
+</div>
+</body>
+</html>
