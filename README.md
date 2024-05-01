@@ -74,6 +74,23 @@ Login with the following credentials:
 Email: admin@gmail.com
 Password: 123
 
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include('myapp.urls')),
+    path("mydminapp", include('mydminapp.urls')),
+    path("supplier", include('supplier.urls')),
+]
+
+# urls.py for admin interface
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("myapp", include('myapp.urls')),
+    path("", include('mydminapp.urls')),
+    path("supplier", include('supplier.urls')),
+]
 # Supplier Page
 
 Navigate to http://127.0.0.1:8000/supplier to view the supplier page.
@@ -81,3 +98,14 @@ Navigate to http://127.0.0.1:8000/supplier to view the supplier page.
 Login with the following credentials:
 Email: priti@gmail.com
 Password: priti
+
+# urls.py for supplier page
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("myapp", include('myapp.urls')),
+    path("mydminapp", include('mydminapp.urls')),
+    path("", include('supplier.urls')),
+]
